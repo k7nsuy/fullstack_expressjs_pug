@@ -1,0 +1,29 @@
+{
+  "name": "wetube_expressjs-pug",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k7nsuy/wetube_expressJS-pug.git"
+  },
+  "author": "Jordan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/k7nsuy/wetube_expressJS-pug/issues"
+  },
+  "homepage": "https://github.com/k7nsuy/wetube_expressJS-pug#readme",
+  "dependencies": {
+    "@babel/node": "^7.18.10",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10"
+  }
+}
