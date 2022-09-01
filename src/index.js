@@ -1,7 +1,10 @@
 import express from "express";
+import morgan from "morgan"
 
 const app = express() 
 const port = 3000
+const logger = morgan("combined")
+
 
 const handleHome = (req,res) => { // controller
     console.log(`hihi`);
@@ -12,10 +15,10 @@ const handleProtected = (req,res) => {
     return res.send(`Welcome to the private lounge`) 
 }
 
-const logger = (req,res,next) => { // middleware (middle soft ware)
-    console.log(`${req.method},${req.url}`);
-    next()
-}
+// const logger = (req,res,next) => { // middleware (middle soft ware)
+//     console.log(`${req.method},${req.url}`);
+//     next()
+// }
 
 const privateMiddleware = (req,res,next) => { //privateMiddleware => middleware (middle soft ware)
     const url = req.url
