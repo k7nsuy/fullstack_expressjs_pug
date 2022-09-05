@@ -1,33 +1,21 @@
 import express from "express";
 import morgan from "morgan" // morgan을 통해서 middleware을 만들 필요 없이 5가지 버전으로
 // http log에 대한 정보를 app.use를 통해 middleware 형식으로 제공
+import globalRouter from "../routers/globalRouter";
+import userRouter from "../routers/userRouter";
+import videoRouter from "../routers/videoRouter";
 
 const app = express() 
 const port = 3000
 const logger = morgan("dev") // dev,combined,common,short,tiny (morgan - 5가지 데이터 형식)
 // 필요한 상황에 따라 사용
 
-
-const globalRouter = express.Router() // Router
-const handleHome = (req,res) => res.send("home") // controller
-
-const videoRouter = express.Router()
-const handleWatchVideo = (req,res) => res.send("Watch Video")
-
-const userRouter = express.Router()
-const handleEitUser = (req,res) => res.send("Edit user")
-
-
-
 app.use("/", globalRouter)
-app.use("/edit", videoRouter)
-app.use("/watch", userRouter)
+app.use("/users", userRouter)
+app.use("/videos", videoRouter)
 
 app.use(logger)
 
-globalRouter.get("/", handleHome)
-videoRouter.get("/videos", handleWatchVideo)
-userRouter.get("/users", handleEitUser)
 
 
 
