@@ -12,6 +12,7 @@ const logger = morgan("dev") // dev,combined,common,short,tiny (morgan - 5가지
 
 app.set("view engine", "pug") // set view engine
 app.set("views", process.cwd() + "/src/views") // src 안에 views로 current directory 지정
+
 app.use("/", globalRouter)
 app.use("/users", userRouter)
 app.use("/videos", videoRouter)
