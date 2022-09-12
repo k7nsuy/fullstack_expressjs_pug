@@ -6,7 +6,7 @@ import userRouter from "../routers/userRouter";
 import videoRouter from "../routers/videoRouter";
 
 const app = express() 
-const port = 3000
+const port = 3001
 const logger = morgan("dev") // dev,combined,common,short,tiny (morgan - 5가지 데이터 형식)
 // 필요한 상황에 따라 사용
 
