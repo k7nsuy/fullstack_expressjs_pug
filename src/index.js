@@ -13,6 +13,7 @@ const logger = morgan("dev") // dev,combined,common,short,tiny (morgan - 5가지
 app.set("view engine", "pug") // set view engine
 app.set("views", process.cwd() + "/src/views") // src 안에 views로 current directory 지정
 
+app.use(express.urlencoded({ extended: true })) // express가 form의 value들을 이해하고 // 자바스크립트 형식으로 변경 해 준다.
 app.use("/", globalRouter)
 app.use("/users", userRouter)
 app.use("/videos", videoRouter)
