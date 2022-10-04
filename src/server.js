@@ -1,13 +1,15 @@
 import express from "express";
 import morgan from "morgan" // morgan을 통해서 middleware을 만들 필요 없이 5가지 버전으로
 // http log에 대한 정보를 app.use를 통해 middleware 형식으로 제공
+
 import globalRouter from "../routers/globalRouter";
 import userRouter from "../routers/userRouter";
 import videoRouter from "../routers/videoRouter";
 
 const app = express() 
-const port = 3001
+
 const logger = morgan("dev") // dev,combined,common,short,tiny (morgan - 5가지 데이터 형식)
+app.use(logger);
 // 필요한 상황에 따라 사용
 
 app.set("view engine", "pug") // set view engine
@@ -18,9 +20,8 @@ app.use("/", globalRouter)
 app.use("/users", userRouter)
 app.use("/videos", videoRouter)
 
-app.use(logger)
 
-
+export default app
 
 
 // app.get('/', handleHome)
@@ -55,6 +56,5 @@ app.use(logger)
 // app.get('/protected',handleProtected)
 
  
-const handleListening = () => console.log(`✅ Server listening on port ${port} 🚀`);
-app.listen(port, handleListening) // handleListening => callback function
+
  
