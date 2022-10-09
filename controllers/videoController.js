@@ -37,6 +37,8 @@ export const postUpload = async (req,res) => {
             description,
             createdAt: Date.now(), // Select date now
             hashtags: hashtags.split(",").map((word) => `#${word}`),
+            // ,를 기준으로 array 안의 data를 split을 통해 독립적으로 분리시키고
+            // map을 통해 각각의 분리된 단어들에 #을 추가한다.
             meta: {
                 views: 0,
                 rating: 0,
@@ -44,9 +46,11 @@ export const postUpload = async (req,res) => {
         })
         return res.redirect("/")
     } catch (error) {
-        console.log(error);
+        return res.render("upload", {
+            pageTitle: "Upload Video",
+            errorMessage: error._message
+        })
     }
-    
 }
 
 
