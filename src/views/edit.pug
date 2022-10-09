@@ -4,4 +4,6 @@ block content
     h4 Change title of video
     form(method="POST")  
         input(name="title" placeholder="Video Title", value=video.title, required) 
+        input(name="description" ,placeholder="Description", required, type="text", minLength=20, value=video.description) 
+        input(name="hashtags" ,placeholder="Hashtags, seperated by comma.", required, type="text", value=video.hashtags.join()) 
         input(type="submit" value="Save") 
