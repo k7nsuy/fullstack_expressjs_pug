@@ -17,7 +17,6 @@ export const watch = async (req,res) => {
 export const getEdit = async (req,res) => {
     const {id} = req.params
     const video = await Video.findById(id)
-    console.log(video.hashtags.join());
 
     if(!video) {
         return res.render("404", {pageTitle: "Video not found."})
@@ -25,10 +24,21 @@ export const getEdit = async (req,res) => {
     return res.render("edit", {pageTitle: `Editing`, video})
 }
 
-export const postEdit = (req,res) => {
+export const postEdit = async (req,res) => {
     const {id} = req.params
-    const {title} = req.body;
-    console.log(title);
+    const {title, description, hashtags} = req.body
+    const video = await Video.findById(id)
+
+    if(!video) {
+        return res.render("404", {pageTitle: "Video not found."})
+    }
+
+    await Video.findByIdAndUpdate(id, {
+        title,description,hashtags:hashtags
+        .split(",")
+        .map((word) => (word.startsWith("#")) ? word : `#${word}`)
+    })
+        
     return res.redirect(`/videos/${id}`)
 }
 
