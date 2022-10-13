@@ -27,7 +27,7 @@ export const getEdit = async (req,res) => {
 export const postEdit = async (req,res) => {
     const {id} = req.params
     const {title, description, hashtags} = req.body
-    const video = await Video.findById(id)
+    const video = await Video.exists({_id: id})
 
     if(!video) {
         return res.render("404", {pageTitle: "Video not found."})
@@ -55,7 +55,8 @@ export const postUpload = async (req,res) => {
             title, // same with title:title(req.body.title)
             description,
             createdAt: Date.now(), // Select date now
-            hashtags: hashtags.split(",").map((word) => `#${word}`),
+            hashtags,
+            // : hashtags.split(",").map((word) => `#${word}`)
             // ,를 기준으로 array 안의 data를 split을 통해 독립적으로 분리시키고
             // map을 통해 각각의 분리된 단어들에 #을 추가한다.
             meta: {
