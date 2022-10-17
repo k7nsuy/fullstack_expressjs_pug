@@ -1,6 +1,6 @@
 import express from 'express'
-import { join,login,search } from '../controllers/globalController'
-import { home } from '../controllers/videoController'
+import { join,login} from '../controllers/globalController'
+import { home, search } from '../controllers/videoController'
 const globalRouter = express.Router()
 
 globalRouter.get("/", home)
