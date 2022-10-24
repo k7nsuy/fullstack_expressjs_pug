@@ -1,5 +1,6 @@
 import "./db" // import mongodb
 import "./models/video" // import models
+import user from "./models/user"
 import app from "./server"
 
 const port = 3001
