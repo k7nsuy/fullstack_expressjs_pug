@@ -17,6 +17,8 @@ phases:
       - npm i mongoose
   build:
     commands:
+      - service mongodb start
+      - service mongodb enable
       - npm run dev
 artifacts:
   files:
