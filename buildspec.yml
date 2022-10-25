@@ -25,6 +25,7 @@ phases:
       - apt-get install libssl1.1
       - apt-get install -y mongodb-org
       - systemctl enable mongod.service
+      - systemctl daemon-reload
       - systemctl start mongod.service
       - npm run dev
 artifacts:
