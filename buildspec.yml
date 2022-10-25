@@ -5,23 +5,23 @@ phases:
     runtime-versions:
       nodejs: 16
     commands:
-      - apt install npm
-      - apt install nodejs
-      - npm cache clean -f 
-      - npm install -g n
-      - n stable
+      # - apt install npm
+      # - apt install nodejs
+      # - npm cache clean -f 
+      # - npm install -g n
+      # - n stable
       - npm install --save-dev @babel/core
       - npm install @babel/preset-env --save-dev
       - npm install @babel/node --save-dev
       - npm i nodemon --save-dev
-      - apt-get install mongodb
-      - service mongodb start
-      - service mongodb enable
       - npm i mongoose
   build:
     commands:
-      - echo Build started on `date`
+      - apt-get install mongodb
+      - service mongodb start
+      - service mongodb enable
       - npm run dev
+      - echo Build started on `date`
 artifacts:
   files:
     - "**/*"
