@@ -17,9 +17,16 @@ phases:
       - npm i mongoose
   build:
     commands:
-      - sudo apt-get install mongodb -y
-      - service mongodb start
-      - service mongodb enable
+      - apt install curl
+      - curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+      - echo "deb http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+      - echo "deb http://security.ubuntu.com/ubuntu focal-security main" | sudo tee /etc/apt/sources.list.d/focal-security.list
+      - apt-get update
+      - apt-get install libssl1.1
+      - apt-get install -y mongodb-org
+      - apt-get install -y mongodb
+      - service mongod start
+      - service mongod enable
       - npm run dev
 artifacts:
   files:
