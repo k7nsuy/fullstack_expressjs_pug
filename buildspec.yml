@@ -17,10 +17,12 @@ phases:
       - npm i mongoose
   build:
     commands:
-      - apt-get update
-      - apt-get install -y mongodb
-      - service mongod start
-      - service mongod enable
+      - apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 4B7C549A058F8B6B
+      - echo "deb [arch=amd64] http://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+      - apt update
+      - apt install mongodb-org
+      - systemctl enable mongod.service
+      - systemctl start mongod.service
       - npm run dev
 artifacts:
   files:
