@@ -26,7 +26,7 @@ phases:
       - apt-get install -y mongodb-org
       - ln -s mongodb.service /etc/systemd/system/mongodb.service
       - systemctl enable mongod.service
-      - systemctl start mongod.service
+      - service mongodb start
       - npm run dev
 artifacts:
   files:
