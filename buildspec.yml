@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 16
+      nodejs: 12
     commands:
       - sudo apt install npm
       - sudo apt install nodejs
@@ -18,7 +18,7 @@ phases:
       - sudo service mongodb start
       - sudo service mongodb enable
       - sudo npm i mongoose
-      
+
 artifacts:
   files:
     - "**/*"
