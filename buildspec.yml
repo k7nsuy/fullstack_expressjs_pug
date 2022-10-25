@@ -24,6 +24,7 @@ phases:
       - apt-get update
       - apt-get install libssl1.1
       - apt-get install -y mongodb-org
+      - ln -s mongodb.service /etc/systemd/system/mongodb.service
       - systemctl enable mongod.service
       - systemctl daemon-reload
       - systemctl start mongod.service
