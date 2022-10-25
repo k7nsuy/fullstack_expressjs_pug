@@ -15,14 +15,12 @@ phases:
       - npm install @babel/node --save-dev
       - npm i nodemon --save-dev
       - npm i mongoose
-  pre-build:
+  build:
     commands:
       - apt-get update
       - apt-get install mongodb
       - service mongodb start
       - service mongodb enable
-  build:
-    commands:
       - npm run dev
       - echo Build started on `date`
 artifacts:
