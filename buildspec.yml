@@ -17,9 +17,9 @@ phases:
       - npm i mongoose
   build:
     commands:
-      - apt-get install mongodb
-      - service mongodb start
-      - service mongodb enable
+      # - apt-get install mongodb
+      # - service mongodb start
+      # - service mongodb enable
       - npm run dev
       - echo Build started on `date`
 artifacts:
