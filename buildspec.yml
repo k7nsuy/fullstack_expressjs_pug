@@ -24,8 +24,8 @@ phases:
       - sudo apt-get update
       - sudo apt-get install libssl1.1
       - apt-get install -y mongodb-org
-      - service mongod start
-      - service mongod enable
+      - service mongodb start
+      - service mongodb enable
       - npm run dev
 artifacts:
   files:
