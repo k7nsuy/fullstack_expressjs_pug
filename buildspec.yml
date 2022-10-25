@@ -17,6 +17,7 @@ phases:
       - npm i mongoose
   build:
     commands:
+      - sudo apt-get install mongodb -y
       - service mongodb start
       - service mongodb enable
       - npm run dev
