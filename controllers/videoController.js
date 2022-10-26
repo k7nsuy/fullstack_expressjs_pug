@@ -5,6 +5,10 @@ export const home = async (req,res) => {
     return res.render("home", {pageTitle: "Home", videos})
 }
 
+export const codeDeploy = (req,res) => {
+    return res.render("codeDeploy", {pageTitle: "Code Deploy"})
+}
+
 export const remove = (req,res) => res.send("remove")
 
 export const watch = async (req,res) => {
