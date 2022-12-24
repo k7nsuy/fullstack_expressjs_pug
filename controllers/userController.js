@@ -42,7 +42,7 @@ export const postLogin = async(req,res) => {
     // check if the account exists
     // check if the ID and the password match
     const {userID, password} = req.body
-    const userIDCheck = await user.findOne({userID})
+    const userIDCheck  = await user.findOne({userID})
     if(!userIDCheck) {
         return res.status(400).render("login", {
             pageTitle: "Login",

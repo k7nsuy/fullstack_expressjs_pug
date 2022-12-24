@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan" // morgan을 통해서 middleware을 만들 필요 없이 5가지 버전으로
 // http log에 대한 정보를 app.use를 통해 middleware 형식으로 제공
-import session from "express-session";
+import session from "express-session"; 
 import rootRouter from "../routers/rootRouter";
 import userRouter from "../routers/userRouter";
 import videoRouter from "../routers/videoRouter";
@@ -21,6 +21,19 @@ app.use(session({ // The session is using before other routers that connect with
     resave: true,
     saveUninitialized: true,
 }))
+
+app.use((req,res,next) => {
+    req.sessionStore.all((error, sessions) => {
+        console.log(sessions);
+        next()
+    })
+})
+
+app.get('/add-one', (req,res,next) => {
+    req.session.count += 1 
+    return res.send(`${req.session.id} ${req.session.count}`)
+})
+
 app.use("/", rootRouter)
 app.use("/users", userRouter)
 app.use("/videos", videoRouter)
