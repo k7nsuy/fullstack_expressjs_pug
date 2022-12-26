@@ -5,6 +5,7 @@ import session from "express-session";
 import rootRouter from "../routers/rootRouter";
 import userRouter from "../routers/userRouter";
 import videoRouter from "../routers/videoRouter";
+import { localsMiddleware } from "./middleware";
 
 const app = express() 
 
@@ -16,24 +17,18 @@ app.set("view engine", "pug") // set view engine
 app.set("views", process.cwd() + "/src/views") // src 안에 views로 current directory 지정
 
 app.use(express.urlencoded({ extended: true })) // express가 form의 value들을 이해하고 // 자바스크립트 형식으로 변경 해 준다.
-app.use(session({ // The session is using before other routers that connect with servers
-    secret: "Hello!",
-    resave: true,
-    saveUninitialized: true,
-}))
 
-app.use((req,res,next) => {
-    req.sessionStore.all((error, sessions) => {
-        console.log(sessions);
-        next()
+app.use(
+    session({ // The session is using before other routers that connect with servers
+        secret: "Hello!",
+        resave: true,
+        saveUninitialized: true,
     })
-})
+)
 
-app.get('/add-one', (req,res,next) => {
-    req.session.count += 1 
-    return res.send(`${req.session.id} ${req.session.count}`)
-})
 
+
+app.use(localsMiddleware)
 app.use("/", rootRouter)
 app.use("/users", userRouter)
 app.use("/videos", videoRouter)

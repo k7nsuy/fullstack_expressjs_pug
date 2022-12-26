@@ -4,26 +4,27 @@ import bcrypt from "bcrypt"
 // Join
 export const getJoin = (req,res) => res.render("join", {pageTitle: "Join"})
 export const postJoin = async(req,res) => {
-    const {userID, email,userName, password1 , password2 , location} = req.body
+    const {userID, userName, email, password1 , password2 , location} = req.body
+    const pageTitle = "Join"
     if(password1 !== password2) {
         return res.status(400).render("join", {
-            pageTitle:"Join", 
+            pageTitle, 
             errorMessage: "The password confirmation does not match."
         })
     }
     
-    const userExists = await user.exists({$or: [{userID},{email}]})
+    const userExists = await user.exists({$or: [{userID},{email}] })
     if(userExists) {
         return res.status(400).render("join", {
-            pageTitle:"Join", 
+            pageTitle, 
             errorMessage: "This name or email is already using."
         })
     }
     try {
         await user.create({
             userID,  
-            email,
             userName,
+            email,
             password1,
             location
         })
@@ -55,8 +56,10 @@ export const postLogin = async(req,res) => {
             errorMessage : "Wrong Password" 
         })
     }
+
     req.session.loggedIn = true;
-    req.session.user = user;
+    req.session.user = userIDCheck;
+
     return res.redirect("/")
 }
 export const edit = (req,res) => res.send("Edit")
