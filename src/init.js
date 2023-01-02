@@ -1,3 +1,4 @@
+import "dotenv/config"
 import "./db" // import mongodb
 import "./models/video" // import video models
 import "./models/user"
