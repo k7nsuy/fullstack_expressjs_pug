@@ -44,7 +44,7 @@ export const postLogin = async(req,res) => {
     // check if the account exists
     // check if the ID and the password match
     const {userID, password} = req.body
-    const userIDCheck  = await user.findOne({userID})
+    const userIDCheck  = await user.findOne({userID, socialOnly: false})
     if(!userIDCheck) {
         return res.status(400).render("login", {
             pageTitle: "Login",
@@ -97,20 +97,51 @@ export const startGithubLogin = (req, res) => {
     if("access_token" in tokenRequest) {
         // access api
         const {access_token} = tokenRequest
-        const userRequest = await (
-            await fetch("https://api.github.com/user", {
+        const apiUrl = "https://api.github.com"
+        const userData = await (
+            await fetch(`${apiUrl}/user`, {
             headers: {
                 Authorization: `token ${access_token}`
             }
         })
         ).json()
-        console.log(userRequest);
+        const emailData = await (
+            await fetch(`${apiUrl}/user/emails`, {
+                headers: {
+                    Authorization: `token ${access_token}`
+                }
+            })
+        ).json()
+        const emailObject = emailData.find(
+            (email) => email.primary === true && email.verified === true
+        )
+        if (!emailObject) {
+            return res.redirect("/login")
+        }
+        console.log(userData);
+        let existingUser = await user.findOne({email: emailObject.email})
+        if(!existingUser) {
+            // create an account
+            existingUser = await user.create({
+                avatarUrl: userData.avatarUrl,
+                userID: userData.name,  
+                userName: userData.userName,
+                email: emailObject.email,
+                password1: "",
+                socialOnly: true,
+                location: userData.location
+            })
+        }
+            req.session.loggedIn = true
+            req.session.user = existingUser
+            return res.redirect("/")
     } else {
       return res.redirect("/login")  
     }
   };
-
 export const edit = (req,res) => res.send("Edit")
-export const remove = (req,res) => res.send("remove")
 export const see = (req,res) => res.send("See")
-export const logout = (req,res) => res.send("logout")
+export const logout = (req,res) => {
+    req.session.destroy()
+    return res.redirect("/")
+}
