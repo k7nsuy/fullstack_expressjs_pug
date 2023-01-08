@@ -125,7 +125,7 @@ export const startGithubLogin = (req, res) => {
             existingUser = await user.create({
                 avatarUrl: userData.avatarUrl,
                 userID: userData.name,  
-                userName: userData.userName,
+                userName: userData.login,
                 email: emailObject.email,
                 password1: "",
                 socialOnly: true,
