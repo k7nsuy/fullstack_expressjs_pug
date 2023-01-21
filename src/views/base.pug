@@ -11,18 +11,19 @@ html(lang="ko")
                     li 
                         a(href="/") HOME
                     if loggedIn
+                        li 
+                            a(href="/videos/upload") Upload Video
+                        li 
+                            a(href="/users/edit") Edit Profile
                         li
                             a(href="/users/logout") Log out
-                        li 
-                            a(href="my-profile") #{loggedInUser.userName}'s profile
                     else
 
                         li 
                             a(href="/login") Login
                         li 
                             a(href="/join") Join
-                    li 
-                        a(href="/videos/upload") Upload Video
+
                     li
                         a(href="/search") Search Video
                     li 

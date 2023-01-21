@@ -60,7 +60,6 @@ export const postLogin = async(req,res) => {
 
     req.session.loggedIn = true;
     req.session.user = userIDCheck;
-
     return res.redirect("/")
 }
 
@@ -139,7 +138,27 @@ export const startGithubLogin = (req, res) => {
       return res.redirect("/login")  
     }
   };
-export const edit = (req,res) => res.send("Edit")
+
+export const getEdit = (req,res) => {
+    return res.render('edit-profile', {pageTitle:'Edit Profile', user: req.session.user})
+}
+
+export const postEdit = async (req,res) => {
+    const {session: {
+        user: {_id}
+    },
+        body: {userID,
+            email,
+            userName,
+            location}
+        } = req
+    const updateUser = await user.findByIdAndUpdate(_id, {
+        userID, email, userName, location
+    },{new:true})
+    req.session.user = updateUser
+    return res.redirect('/users/edit')
+}
+
 export const see = (req,res) => res.send("See")
 export const logout = (req,res) => {
     req.session.destroy()
