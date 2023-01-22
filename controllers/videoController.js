@@ -1,3 +1,4 @@
+import user from "../src/models/user"
 import Video from "../src/models/video"
 
 export const home = async (req,res) => {
@@ -13,7 +14,8 @@ export const remove = (req,res) => res.send("remove")
 
 export const watch = async (req,res) => {
     const {id} = req.params
-    const video = await Video.findById(id)
+    const video = await Video.findById(id).populate('owner')
+    console.log(video);
     if(!video) {
         return res.status(404).render("404", {pageTitle: "Video not found."})
     }
@@ -53,8 +55,8 @@ export const getUpload = (req,res) => {
 
 
 export const postUpload = async(req,res) => {
+    const {user: {_id}} = req.session
     const {path: fileUrl} = req.file
-    console.log(file);
     const {title, description, hashtags} = req.body
     try {
         console.log(req.body); // get the data   from post request
@@ -62,6 +64,7 @@ export const postUpload = async(req,res) => {
             title, // same with title:title(req.body.title)
             description,
             fileUrl,
+            owner: _id,
             createdAt: Date.now(), // Select date now
             hashtags: Video.formatHashtags(hashtags),
             // : hashtags.split(",").map((word) => `#${word}`)

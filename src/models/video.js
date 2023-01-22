@@ -12,7 +12,8 @@ const videoSchema = new mongoose.Schema({
     meta: {
         rating: { type: Number, default:0, required: true},
         views:  { type: Number, default:0, required: true}
-    }
+    },
+    owner: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'user'}
 })
 
 // videoSchema.pre("save", async function() {

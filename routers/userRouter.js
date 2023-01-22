@@ -22,7 +22,7 @@ userRouter
 userRouter
     .get("/github/finish",pubicOnlyMiddleware, finishGithubLogin)
 userRouter
-    .get("/:id(\\d+)", see)
+    .get("/:id", see)
 
 
 
