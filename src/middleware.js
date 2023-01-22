@@ -23,4 +23,15 @@ export const pubicOnlyMiddleware = (req,res,next) => {
     }
 }
 
-export const uploadMiddleware = multer({dest: 'uploads/'})
+// use the multer package to upload files in Node.js
+export const uploadAvatar = multer({dest: 'uploads/avatars/', 
+    limits: {
+        fileSize: 3000000,
+}})
+
+export const uploadVideo = multer({dest: 'uploads/videos/', 
+    limits: {
+        fileSize: 10000000,
+}})
+
+

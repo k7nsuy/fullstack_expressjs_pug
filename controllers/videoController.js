@@ -52,13 +52,16 @@ export const getUpload = (req,res) => {
 }
 
 
-export const postUpload = async (req,res) => {
+export const postUpload = async(req,res) => {
+    const {path: fileUrl} = req.file
+    console.log(file);
     const {title, description, hashtags} = req.body
     try {
         console.log(req.body); // get the data   from post request
         await Video.create({
             title, // same with title:title(req.body.title)
             description,
+            fileUrl,
             createdAt: Date.now(), // Select date now
             hashtags: Video.formatHashtags(hashtags),
             // : hashtags.split(",").map((word) => `#${word}`)
@@ -97,16 +100,3 @@ export const search = async (req,res) => {
     }
     return res.render("search", {pageTitle:"Search", videos})
 }
-
-
-
-    // const newVideo = {
-    //         title: title,
-    //         rating: 5,
-    //         comments: 2,
-    //         createAt: "2 minutes ago",
-    //         views: 1,
-    //         id: 4
-    // }
-    // here we will add a video to the videos array
-    // videos.push(newVideo) // push the new data into videos array

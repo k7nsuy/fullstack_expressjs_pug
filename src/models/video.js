@@ -8,6 +8,7 @@ const videoSchema = new mongoose.Schema({
     description: {type: String, required: true, trim: true, minLength: 20},
     createdAt: {type:Date, required:true }, // 해당 데이터 형식을 필수적으로 Date가 되어야 한다.
     hashtags: [{type: String}],
+    fileUrl: {type: String, required: true},
     meta: {
         rating: { type: Number, default:0, required: true},
         views:  { type: Number, default:0, required: true}
