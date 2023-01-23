@@ -16,13 +16,6 @@ const videoSchema = new mongoose.Schema({
     owner: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'user'}
 })
 
-// videoSchema.pre("save", async function() {
-//     console.log("we are about save this", this)
-//     this.hashtags = this.hashtags[0]
-//     .split(",")
-//     .map((word) => (word.startWith("#") ? word : `#${word}`))
-// })
-
 videoSchema.static("formatHashtags", function(hashtags) {
     return hashtags.split(",").map((word) => (word.startsWith("#")) ? word : `#${word}`)
 })

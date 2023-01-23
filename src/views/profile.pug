@@ -2,7 +2,7 @@ extends base
 include mixins/video
 
 block content 
-    each video in videos 
+    each video in findUserId.videos 
         +video(video)
     else 
         li Sorry Nothing Found
