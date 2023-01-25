@@ -2,7 +2,11 @@ extends base
 include mixins/video
 
 block content 
-    each video in findUserId.videos 
-        +video(video)
-    else 
-        li Sorry Nothing Found
+    div.profile__data
+        img(src="/" + findUserId.avatarUrl).avatar
+        h3=findUserId.name
+    div.video-grid
+        each video in findUserId.videos
+            +video(video)
+        else
+            span.empty__message No videos found

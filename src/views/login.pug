@@ -3,15 +3,12 @@ extend base
 block content 
     if errorMessage   
         h2=errorMessage
-
     form(method="POST")
         input(placeholder="userID" name="userID", type="text" required)     
         input(placeholder="Password" name="password", type="password" required)     
         input(type="submit", value="Login")
-        br
-        a(href="/users/github/start") Continue with github &rarr;
-    hr
-    div 
+        include partials/social-login
+    div.auth-swithch
         span You don't have an account? 
         a(href="/join") Join now &rarr;
 
